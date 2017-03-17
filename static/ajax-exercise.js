@@ -43,13 +43,28 @@ $("#weather-form").on('submit', updateWeather);
 
 // PART 3: ORDER MELONS
 
-function orderMelons(evt) {
+
+function showMelonOrder(result) {
+    alert(result.code + " " + result.msg);
+}
+
+function submitMelonOrder(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
+    var formInputs = {
+        "melon_type": $("#melon-type-field").val(),
+        "qty": $("#qty-field").val()
+    };
+
+    $.post("/order-melons.json",
+           formInputs,
+           showMelonOrder
+           );
+
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
 }
 
-$("#order-form").on('submit', orderMelons);
+$("#order-form").on('submit', submitMelonOrder);
 
 
